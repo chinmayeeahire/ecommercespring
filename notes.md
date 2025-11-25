@@ -72,4 +72,16 @@ It is the Container is the core of Spring Framework. It creates the objects, con
 
 - This Container uses Dependency Injection(DI) to manage the components that make up the application.
 
-- helps you to create object on behalf of you(just need to tell spring the class)
+- helps you to create object on behalf of you(just need to tell spring the class) how - ex: @component
+
+# ANNOTATION
+
+- @Component: indicates that a class should be managed by the Spring IOC container if discovered during component scan
+
+- @Service
+
+- @RestController: giving capabilities as @Controller(semantic purpose) --> @Component
+
+- @Autowired : nnotation driven Dependency Injection. The main annotation of this feature is @Autowired. It allows Spring to resolve and inject collaborating beans into our bean.
+
+
