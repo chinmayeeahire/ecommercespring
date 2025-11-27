@@ -84,4 +84,7 @@ It is the Container is the core of Spring Framework. It creates the objects, con
 
 - @Autowired : nnotation driven Dependency Injection. The main annotation of this feature is @Autowired. It allows Spring to resolve and inject collaborating beans into our bean.
 
+- final keyword: a non access modifier used for classe, attributes and methods, which makes them non-changeable(impossible to herit or overide)
+
+can't do with autowired(final) - so autowired is not recommended
 

@@ -4,6 +4,7 @@ package com.example.ecommercespring.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.example.ecommercespring.gateway.api.FakeStoreProductApi;
 import com.example.ecommercespring.gateway.api.FakestoreCategoryApi;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -24,4 +25,9 @@ public class RetrofitConfig {
     return retrofit.create(FakestoreCategoryApi.class);
   } //this method is now responsible for providing an object of fakestorecategoryapi
   
+
+  @Bean
+  public FakeStoreProductApi fakeStoreProductApi(Retrofit retrofit){
+    return retrofit.create(FakeStoreProductApi.class);
+  }
 }
