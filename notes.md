@@ -88,3 +88,39 @@ It is the Container is the core of Spring Framework. It creates the objects, con
 
 can't do with autowired(final) - so autowired is not recommended
 
+- @Primary : In some situations we need to register more than one bean of the same type. 
+
+- @Qualifier: by using this we can eliminiate the issue of which bean needs to be injected.
+
+
+
+
+ProductService           Category Service
+     |                           |
+IcategoryGateway           ICategoryGateway
+
+RetrofitImpl                  RestTemplateImpl
+
+
+
+@Primary vs  @Qualifier(if we need to specifically indicate it, we can via Qualifier)
+
+- In precedence @Qualifier is given more precedence, 
+
+Basically Primary defines a default while Qualifier is very specific.
+
+
+- Rest Template: 
+
+
+# ADAPTER DESIGN PATTERN
+object of 1 type -> Conversion -> Object of 2 type
+
+EX: 
+- Your country plug -> Internationale Adapter -> New country plug
+
+//MAPPER CLASSSES
+
+FakestoreGetAllCategoriesDTO-> GetAllCategoryDTO
+                 conversion of type both to understand
+ProductCatelog   ---->    Order manage service(oms)
