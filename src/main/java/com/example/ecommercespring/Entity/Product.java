@@ -1,27 +1,28 @@
-package com.example.ecommercespring.DTO;
+package com.example.ecommercespring.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.databind.JsonSerializable.Base;
 
+import jakarta.persistence.Entity;
+import lombok.*;
+
+@Entity
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDTO {
-   private String image;
+@Builder
+public class Product extends BaseEntity{
+
+ private String image;
    private String color;
    private int price;
    private String description;
    private int discount;
    private String model;
-   private Long id;
+   private long id;
    private String title;
    private String category;
    private String brand;
    private boolean popular;
+
 }

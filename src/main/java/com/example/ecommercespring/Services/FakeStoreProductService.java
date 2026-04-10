@@ -19,4 +19,7 @@ public class FakeStoreProductService implements IProductService{
          return this.productGateway.getProductById(id);
     }
 
+    public ProductDTO createProduct(ProductDTO dto){
+    return null;
+    }
 }
