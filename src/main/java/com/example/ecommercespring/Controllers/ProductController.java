@@ -4,9 +4,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ecommercespring.DTO.ProductDTO;
+import com.example.ecommercespring.DTO.ProductWithCategoryDTO;
 import com.example.ecommercespring.Services.IProductService;
 import com.example.ecommercespring.gateway.IProductGateway;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,9 +35,23 @@ public class ProductController {
       return ResponseEntity.ok(result);
   }
  
-  @PostMapping
-  public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO dto){
-    return ResponseEntity.ok(productService.createProduct(dto));
-  }
+@PostMapping
+public ResponseEntity<?> createProduct(@RequestBody ProductDTO dto) {
+    try {
+        ProductDTO result = productService.createProduct(dto);
+        return ResponseEntity.ok(result);
+
+    } catch (Exception e) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(e.getMessage());
+    }
+}
+
+@GetMapping("/{id}/details")
+public ResponseEntity<ProductWithCategoryDTO> getProductWithCategory(@PathVariable long id) throws Exception{
+  ProductWithCategoryDTO dto=productService.getProductWithCategory(id);
+  return ResponseEntity.ok(dto);
+}
 
 }

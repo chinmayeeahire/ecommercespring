@@ -1,8 +1,14 @@
 package com.example.ecommercespring.mappers;
 
-import com.example.ecommercespring.DTO.ProductDTO;
-import com.example.ecommercespring.Entity.Product;
 
+
+import java.util.List;
+
+import com.example.ecommercespring.DTO.CategoryWithProductDTO;
+import com.example.ecommercespring.DTO.ProductDTO;
+import com.example.ecommercespring.DTO.ProductWithCategoryDTO;
+import com.example.ecommercespring.Entity.Product;
+import com.example.ecommercespring.Entity.Category;
 public class ProductMapper {
 
     public static ProductDTO toDto(Product product){
@@ -15,13 +21,13 @@ public class ProductMapper {
                          .discount(product.getDiscount())
                          .model(product.getModel())
                          .title(product.getTitle())
-                         .category(product.getCategory())
+                         .categoryId(product.getCategory().getId())
                          .brand(product.getBrand())
                          .popular(product.isPopular())
                          .build();
     }
 
-    public static Product toEntity(ProductDTO dto){
+    public static Product toEntity(ProductDTO dto, Category category){
         return Product.builder()
                       .image(dto.getImage())
                       .color(dto.getColor())
@@ -30,9 +36,28 @@ public class ProductMapper {
                       .discount(dto.getDiscount())
                       .model(dto.getModel())
                       .title(dto.getTitle())
-                      .category(dto.getCategory())
+                      .category(category)
                       .brand(dto.getBrand())
                       .popular(dto.isPopular())
                       .build();
     }
+
+    public static ProductWithCategoryDTO toProductWithCategoryDTO (Product product){
+        return ProductWithCategoryDTO.builder()
+                                     .id(product.getId())
+                                     .image(product.getImage())
+                                     .color(product.getColor())
+                                     .price(product.getPrice())
+                                     .description(product.getDescription())
+                                     .discount(product.getDiscount())
+                                     .model(product.getModel())
+                                     .title(product.getTitle())
+                                     .category(CategoryMapper.toDto(product.getCategory()))
+                                     .brand(product.getBrand())
+                                     .popular(product.isPopular())
+                                     .build();
+                                      
+    }
+
+   
 }

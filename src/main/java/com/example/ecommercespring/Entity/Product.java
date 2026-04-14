@@ -1,8 +1,11 @@
 package com.example.ecommercespring.Entity;
 
-import com.fasterxml.jackson.databind.JsonSerializable.Base;
+
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 @Entity
@@ -19,10 +22,17 @@ public class Product extends BaseEntity{
    private String description;
    private int discount;
    private String model;
-   private long id;
+
    private String title;
-   private String category;
+  
    private String brand;
    private boolean popular;
+    
+   
+   //each product belongs to one category
+   //and one category can have many products
+   @ManyToOne(fetch=FetchType.LAZY)
+   @JoinColumn(name="category_id", nullable=false)
+   private Category category;
 
 }

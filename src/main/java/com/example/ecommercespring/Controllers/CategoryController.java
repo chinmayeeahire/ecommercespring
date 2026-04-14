@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ecommercespring.DTO.CategoryDTO;
+import com.example.ecommercespring.DTO.CategoryWithProductDTO;
 import com.example.ecommercespring.Services.CategoryService;
 import com.example.ecommercespring.Services.FakestoreCategoryService;
 import com.example.ecommercespring.Services.ICategoryService;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,10 +60,25 @@ public CategoryController(ICategoryService categoryService){
 
 
 @GetMapping
-public ResponseEntity<List<CategoryDTO>> getAllCategories() throws IOException{
+public ResponseEntity<?> getAllCategories(@RequestParam(required=false) String name) throws Exception{
+    if(name!=null && !name.isBlank()){
+        CategoryDTO categoryDTO=categoryService.getByName(name);
+        return ResponseEntity.ok(categoryDTO);
+    }else{
     List<CategoryDTO> result= this.categoryService.getAllCategories();
-    return ResponseEntity.created(null)
-    .body(result);
+    return ResponseEntity.ok(result);
+    }
 }
 
+
+@PostMapping("/create-category")
+public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO dto) throws Exception{
+    return ResponseEntity.ok(categoryService.createCategory(dto));
+}
+
+@GetMapping("/{id}/details")
+public ResponseEntity<CategoryWithProductDTO> getCategoryWithProduct(@PathVariable long id) throws Exception{
+    CategoryWithProductDTO dto=categoryService.getCategoryWithProduct(id);
+    return ResponseEntity.ok(dto);
+}
  }

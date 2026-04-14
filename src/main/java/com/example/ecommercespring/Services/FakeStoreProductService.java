@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.ecommercespring.Controllers.ProductController;
 import com.example.ecommercespring.DTO.ProductDTO;
+import com.example.ecommercespring.DTO.ProductWithCategoryDTO;
 import com.example.ecommercespring.gateway.IProductGateway;
 
 @Service
@@ -21,5 +22,8 @@ public class FakeStoreProductService implements IProductService{
 
     public ProductDTO createProduct(ProductDTO dto){
     return null;
+    }
+    public ProductWithCategoryDTO getProductWithCategory(Long id) throws Exception{
+        return null;
     }
 }
