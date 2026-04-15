@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ecommercespring.DTO.CategoryDTO;
 import com.example.ecommercespring.DTO.CategoryWithProductDTO;
+import com.example.ecommercespring.Exception.CategoryNotFoundException;
 import com.example.ecommercespring.Services.CategoryService;
 import com.example.ecommercespring.Services.FakestoreCategoryService;
 import com.example.ecommercespring.Services.ICategoryService;
@@ -14,8 +15,10 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,4 +84,10 @@ public ResponseEntity<CategoryWithProductDTO> getCategoryWithProduct(@PathVariab
     CategoryWithProductDTO dto=categoryService.getCategoryWithProduct(id);
     return ResponseEntity.ok(dto);
 }
- }
+
+@ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<String> handleCategoryNotFound(CategoryNotFoundException e){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+}

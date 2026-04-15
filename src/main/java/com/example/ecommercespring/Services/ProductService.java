@@ -8,6 +8,7 @@ import com.example.ecommercespring.DTO.ProductDTO;
 import com.example.ecommercespring.DTO.ProductWithCategoryDTO;
 import com.example.ecommercespring.Entity.Category;
 import com.example.ecommercespring.Entity.Product;
+import com.example.ecommercespring.Exception.ProductNotFoundException;
 import com.example.ecommercespring.Repository.CategoryRepository;
 import com.example.ecommercespring.Repository.ProductRepository;
 import com.example.ecommercespring.mappers.ProductMapper;
@@ -31,7 +32,7 @@ public ProductDTO getProductById(Long id) throws Exception{
     //            .orElseThrow(()-> new Exception("Product not found"));
 
     Product product=repo.findById(id)
-            .orElseThrow(()-> new Exception("Product not found"));
+            .orElseThrow(()-> new ProductNotFoundException("Product not found with id"+id));
     
     ProductDTO dto=ProductMapper.toDto(product);
     return dto;

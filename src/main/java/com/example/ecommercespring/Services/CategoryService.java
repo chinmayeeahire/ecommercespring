@@ -12,6 +12,7 @@ import com.example.ecommercespring.DTO.CategoryDTO;
 import com.example.ecommercespring.DTO.CategoryWithProductDTO;
 import com.example.ecommercespring.DTO.ProductDTO;
 import com.example.ecommercespring.Entity.Product;
+import com.example.ecommercespring.Exception.CategoryNotFoundException;
 import com.example.ecommercespring.Repository.CategoryRepository;
 import com.example.ecommercespring.mappers.CategoryMapper;
 import com.example.ecommercespring.mappers.ProductMapper;
@@ -73,7 +74,7 @@ public CategoryDTO createCategory(CategoryDTO dto){
 @Override 
 public CategoryDTO getByName(String name) throws Exception{
     Category category = repo.findByName(name)
-             .orElseThrow(()->new Exception("Category not found with name:" + name));
+             .orElseThrow(()->new CategoryNotFoundException("Category not found by name"+name));
 
              return CategoryMapper.toDto(category);
 }
