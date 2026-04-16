@@ -57,9 +57,5 @@ public ResponseEntity<ProductWithCategoryDTO> getProductWithCategory(@PathVariab
   return ResponseEntity.ok(dto);
 }
 
-@ExceptionHandler(ProductNotFoundException.class)
-public ResponseEntity<String> handleProductNotFound(ProductNotFoundException e){
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-}
 
 }

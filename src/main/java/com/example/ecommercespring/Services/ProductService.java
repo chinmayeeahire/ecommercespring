@@ -8,6 +8,7 @@ import com.example.ecommercespring.DTO.ProductDTO;
 import com.example.ecommercespring.DTO.ProductWithCategoryDTO;
 import com.example.ecommercespring.Entity.Category;
 import com.example.ecommercespring.Entity.Product;
+import com.example.ecommercespring.Exception.GlobalExceptionHandler;
 import com.example.ecommercespring.Exception.ProductNotFoundException;
 import com.example.ecommercespring.Repository.CategoryRepository;
 import com.example.ecommercespring.Repository.ProductRepository;
