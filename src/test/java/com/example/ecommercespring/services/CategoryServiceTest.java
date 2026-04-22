@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,25 +32,39 @@ public class CategoryServiceTest {
     @InjectMocks
     private CategoryService categoryService;
 
+    private CategoryDTO categoryDTO;
+    private Category category1;
+    private Category category2;
+    private Category category3;
+
+
+    @BeforeEach
+    void setUp(){
+       categoryDTO = CategoryDTO.builder()
+        .name("Electronics")
+        .build();
+      
+     category1 = Category.builder()
+        .name("Electronics")
+        .build();
+       category1.setId(1L);
+     category2 = Category.builder()
+        .name("Books")
+        .build();
+       category2.setId(2L);
+     category3 = Category.builder()
+        .name("Movies")
+        .build();
+       category2.setId(3L);
+    }
+
     @Test
     @DisplayName("should return all categories succesfully")
     void getAllCategories_shouldReturnAllCategories(){
        //arrange
        List<Category> categories=new ArrayList<>();
-       Category category1 = Category.builder()
-        .name("Electronics")
-        .build();
-       category1.setId(1L);
-      Category category2 = Category.builder()
-        .name("Books")
-        .build();
-       category2.setId(2L);
-
-      Category category3 = Category.builder()
-        .name("Movies")
-        .build();
-       category2.setId(2L);
-
+       
+ 
        categories.add(category1);
        categories.add(category2);
        categories.add(category3);
@@ -65,9 +80,7 @@ public class CategoryServiceTest {
     @Test
     void createCategory_shouldCreateCategory(){
       //arrange
-       CategoryDTO categoryDTO = CategoryDTO.builder()
-        .name("Electronics")
-        .build();
+      
       Category savedCategory=Category.builder().name("Electronics").build();
 
    
