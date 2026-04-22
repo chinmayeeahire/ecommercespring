@@ -78,5 +78,18 @@ public class CategoryServiceTest {
     //assert
    assertEquals("Electronics", res.getName());
     }
+    
 
+    @Test
+    @DisplayName("should return empty list when no category exist ")
+    void getAllCategories_shouldReturnEmptyListWhenNoCategoryExist(){
+      when(categoryRepository.findAll()).thenReturn(new ArrayList<>());
+
+      //act
+      List<CategoryDTO> res=categoryService.getAllCategories();
+
+      //assert
+      assertEquals(res.size(), 0);
+      verify(categoryRepository, times(1)).findAll();
+    }
 }
