@@ -19,6 +19,7 @@ import com.example.ecommercespring.DTO.CategoryDTO;
 import com.example.ecommercespring.Entity.Category;
 import com.example.ecommercespring.Repository.CategoryRepository;
 import com.example.ecommercespring.Services.CategoryService;
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class) //This annotation is used to enable Mockito for the test class with Junit
 public class CategoryServiceTest {
@@ -54,13 +55,28 @@ public class CategoryServiceTest {
        categories.add(category3);
         when(categoryRepository.findAll()).thenReturn(categories);
        //act
-
        List<CategoryDTO> result=categoryService.getAllCategories();
-
-
        //assert
-
       assertEquals(result.size(), 3);
       verify(categoryRepository, times(1)).findAll();
     }
+
+
+    @Test
+    void createCategory_shouldCreateCategory(){
+      //arrange
+       CategoryDTO categoryDTO = CategoryDTO.builder()
+        .name("Electronics")
+        .build();
+      Category savedCategory=Category.builder().name("Electronics").build();
+
+   
+    when(categoryRepository.save(any(Category.class))).thenReturn(savedCategory);
+    //act
+    CategoryDTO res=categoryService.createCategory(categoryDTO);
+
+    //assert
+   assertEquals("Electronics", res.getName());
+    }
+
 }
